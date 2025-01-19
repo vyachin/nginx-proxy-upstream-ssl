@@ -1,0 +1,16 @@
+services:
+  proxy:
+    image: nginx:1.27-alpine
+    volumes:
+      - ./config/proxy:/etc/nginx/conf.d
+      - ./logs/proxy:/var/log/nginx
+    ports:
+      - "9001:80"
+    links:
+      - web
+  web:
+    image: nginx:1.27-alpine
+    volumes:
+      - ./config/web:/etc/nginx/conf.d
+      - ./logs/web:/var/log/nginx
+      - ./www:/var/www
